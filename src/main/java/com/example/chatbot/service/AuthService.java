@@ -15,12 +15,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
-
+@RequiredArgsConstructor
 public class AuthService {
 
-    private final AdminUserRepository repo = null;
-    private final PasswordEncoder encoder = null;
-    private final JwtService jwtService = null;
+    private final AdminUserRepository repo;
+    private final PasswordEncoder encoder;
+    private final JwtService jwtService;
 
     public TokenResponse login(LoginRequest req) {
         // Email ya password galat ho, dono mein ek hi message (hacker ko hint nahi)
