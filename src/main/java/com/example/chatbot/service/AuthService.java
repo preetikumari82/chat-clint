@@ -4,8 +4,7 @@ import com.example.chatbot.dto.LoginRequest;
 import com.example.chatbot.dto.TokenResponse;
 import com.example.chatbot.model.AdminUser;
 import com.example.chatbot.repo.AdminUserRepository;
-import com.example.chatbot.securty.JwtService;
-
+import com.example.chatbot.security.JwtService;   // package: securty -> security
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,7 @@ public class AuthService {
     private final JwtService jwtService;
 
     public TokenResponse login(LoginRequest req) {
-        // Email ya password galat ho, dono mein ek hi message (hacker ko hint nahi)
+        // Email galat ho ya password, ek hi message (attacker ko hint nahi milta)
         AdminUser user = repo.findByEmail(req.email())
                 .filter(AdminUser::isEnabled)
                 .filter(u -> encoder.matches(req.password(), u.getPasswordHash()))
@@ -40,8 +39,8 @@ public class AuthService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid refresh token");
         }
 
-        // Access token ko refresh ke taur par chalne nahi denge
-        if (!"refresh".equals(claims.get("type", String.class))) {
+        // Access token ko refresh ki jagah nahi chalne denge
+        if (!JwtService.TYPE_REFRESH.equals(claims.get("type", String.class))) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid refresh token");
         }
 
@@ -54,7 +53,7 @@ public class AuthService {
 
     private TokenResponse buildTokens(AdminUser user) {
         return new TokenResponse(
-        		jwtService.generateAccessToken(user),
+                jwtService.generateAccessToken(user),
                 jwtService.generateRefreshToken(user),
                 "Bearer",
                 jwtService.accessSeconds());

@@ -1,0 +1,22 @@
+# Sirf database chalane ke liye (Step 1). Poora app compose Step 10 me.
+# Chalao:  docker compose up -d
+services:
+  postgres:
+    image: pgvector/pgvector:pg16      # Postgres + pgvector extension pehle se installed
+    container_name: chatbot-postgres
+    environment:
+      POSTGRES_DB: chatbot
+      POSTGRES_USER: chatbot
+      POSTGRES_PASSWORD: chatbot_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chatbot -d chatbot"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:
