@@ -98,7 +98,7 @@ public class IngestionService {
 
     /** Admin ko dikhane layak chhota message (stack trace nahi). */
     private String shorten(Exception e) {
-        String m = (e instanceof IngestionException)
+        String m = (e instanceof IngestionException && e.getCause() != null)
                 ? e.getMessage()
                 : "Processing failed: " + e.getClass().getSimpleName() + ": " + e.getMessage();
         return m != null && m.length() > 500 ? m.substring(0, 500) : m;
