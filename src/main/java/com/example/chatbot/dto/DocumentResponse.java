@@ -25,9 +25,12 @@ public record DocumentResponse(
         String uploadedBy,
         String failureReason,
         Instant createdAt,
-        Instant updatedAt
+        Instant updatedAt,
+        String message
 ) {
-    public static DocumentResponse from(Document d, String failureReason) {
+   
+
+	public static DocumentResponse from(Document d, String failureReason) {
         return new DocumentResponse(
                 d.getId(),
                 d.getFileName(),
@@ -41,6 +44,8 @@ public record DocumentResponse(
                 d.getUploadedBy() != null ? d.getUploadedBy().getEmail() : null,
                 failureReason,
                 d.getCreatedAt(),
-                d.getUpdatedAt());
+                d.getUpdatedAt(),
+        		d.getMessage());
+        		
     }
 }

@@ -1,5 +1,5 @@
 package com.example.chatbot.service.ingestion;
 
-public class TextExtractor {
+public class IngestionTrigger {
 
 }

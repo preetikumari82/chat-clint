@@ -122,6 +122,20 @@
     <groupId>org.springframework.ai</groupId>
     <artifactId>spring-ai-starter-model-google-genai-embedding</artifactId>
 </dependency>
+<!-- ===== Step 4A: pom.xml ke <dependencies> ke andar ye 2 dependencies ADD karo ===== -->
+
+<!-- PDF se page-by-page text (page number citation ke liye) -->
+<dependency>
+    <groupId>org.apache.pdfbox</groupId>
+    <artifactId>pdfbox</artifactId>
+    <version>3.0.5</version>
+</dependency>
+
+<!-- DOC / DOCX padhne ke liye (Spring AI ka Tika reader; version BOM se aata hai) -->
+<dependency>
+    <groupId>org.springframework.ai</groupId>
+    <artifactId>spring-ai-tika-document-reader</artifactId>
+</dependency>
 
         <!-- REMOVED: com.hospital:Hospital  (dusre project ki dependency, yahan ki zaroorat nahi) -->
     </dependencies>

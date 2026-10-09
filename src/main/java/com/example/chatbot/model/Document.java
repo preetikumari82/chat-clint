@@ -72,6 +72,12 @@ public class Document {
 
     @UpdateTimestamp
     private Instant updatedAt;
+    
+    @Getter
+    @Setter
+    private String message;
+    
+    
 
 	public Long getId() {
 		// TODO Auto-generated method stub
